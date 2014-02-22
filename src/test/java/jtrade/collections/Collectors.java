@@ -1,4 +1,4 @@
-package jtrade;
+package jtrade.collections;
 
 import org.junit.Test;
 import jtrade.Stock;
@@ -9,6 +9,6 @@ public class Collectors {
         //Stock.portfolio.stream().
         // TODO-DLN groupingBy
 
-
+        System.out.println("hello world");
     }
 }

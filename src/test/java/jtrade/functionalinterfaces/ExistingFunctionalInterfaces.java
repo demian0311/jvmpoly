@@ -1,4 +1,4 @@
-package jtrade;
+package jtrade.functionalinterfaces;
 
 /**
  * Created by demian on 1/20/14.

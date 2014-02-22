@@ -1,4 +1,4 @@
-package jtrade;
+package jtrade.lambdas;
 
 import org.junit.Test;
 

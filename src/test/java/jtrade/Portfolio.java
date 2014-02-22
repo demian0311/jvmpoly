@@ -20,7 +20,3 @@ public class Portfolio {
     }
 }
 
-interface PortfolioFactory {
-    Portfolio create(String owner, List<Stock> stocks);
-}
-

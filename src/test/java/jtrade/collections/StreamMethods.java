@@ -1,6 +1,7 @@
-package jtrade;
+package jtrade.collections;
 
 import com.google.common.base.Stopwatch;
+import jtrade.Stock;
 import org.junit.Test;
 
 import java.util.stream.IntStream;

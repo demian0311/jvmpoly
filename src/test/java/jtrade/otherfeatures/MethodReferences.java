@@ -1,5 +1,8 @@
-package jtrade;
+package jtrade.otherfeatures;
 
+import jtrade.Portfolio;
+import jtrade.PortfolioFactory;
+import jtrade.Stock;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
