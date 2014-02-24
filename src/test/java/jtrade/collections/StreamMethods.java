@@ -19,6 +19,9 @@ import static org.junit.Assert.assertTrue;
  */
 public class StreamMethods {
 
+    /**
+     *
+     */
     @Test public void range() {
         IntStream.range(1, 5).forEach(out::println);
     }
@@ -46,18 +49,25 @@ public class StreamMethods {
         } catch (Exception e) { /* do nothing */ }
     }
 
-    @Test public void parallelStream(){
+    /**
+     * It's easy to parallelize Stream processing.
+     */
+    @Test public void parallelStream() throws Exception{
         Stopwatch swStream = new Stopwatch().start();
-        IntStream.range(0, 1000).forEach(ii -> expensiveOperation(ii));
+        IntStream.range(0, 1000) // get an IntStream out of here
+                .forEach(ii -> expensiveOperation(ii));
         Long swStopTime = swStream.stop().elapsedMillis();
-        System.out.println("\nstream: " + swStopTime);
+        System.out.println("\nserial stream   : " + swStopTime);
 
         Stopwatch swParallelStream = new Stopwatch().start();
-        IntStream.range(0, 1000).parallel().limit(1000).forEach(ii -> expensiveOperation(ii));
+        IntStream.range(0, 1000) // get an IntStream out of here
+                .parallel()
+                .forEach(ii -> expensiveOperation(ii));
+
         Long swParallelStopTime = swParallelStream.stop().elapsedMillis();
-        System.out.println("\nparallel stream: " + swParallelStopTime);
+        System.out.println("\nparallel stream : " + swParallelStopTime);
 
         assertTrue(swStopTime > (2 * swParallelStopTime));
+        Thread.sleep(20l);
     }
-
 }

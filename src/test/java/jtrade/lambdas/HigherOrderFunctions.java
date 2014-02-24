@@ -1,10 +1,9 @@
-package jtrade;
+package jtrade.lambdas;
 
-import org.junit.Ignore;
+import jtrade.Stock;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;

@@ -44,7 +44,7 @@ public class NightHacking {
         Set<Box> blueBlocks = shapes.stream()
             .filter(s -> s.getColor() == Color.BLUE)
             .map(Shape::getContainingBox) //
-            .collect(Collectors.toSet());
+            .collect(CollectorsTest.toSet());
 
         int sumOfWeights = shapes.stream()
             .filter(s -> s.getColor() == Color.BLUE)
