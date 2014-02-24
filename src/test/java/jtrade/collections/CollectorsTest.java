@@ -7,6 +7,8 @@ import jtrade.Stock;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -30,7 +32,10 @@ public class CollectorsTest {
     @Test public void collect2(){
         List<String> tickerSymbols = Stock.portfolio.stream()
                 .map(Stock::getTicker)
-                .collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+                .collect(
+                        ArrayList::new,     // supplier
+                        ArrayList::add,     // accumulator
+                        ArrayList::addAll); // combiner
 
         assertEquals(
                 Arrays.asList("TWC", "LVLT", "GOOG", "AAPL", "MSFT", "ORCL"),
@@ -40,14 +45,30 @@ public class CollectorsTest {
     @Test public void collect3(){
         String tickerSymbolsString = Stock.portfolio.stream()
                 .map(Stock::getTicker)
-                .collect(StringBuilder::new, StringBuilder::append, StringBuilder::append)
+                .collect(
+                        StringBuilder::new,    // supplier
+                        StringBuilder::append, // accumulator
+                        StringBuilder::append) // combiner
                 .toString();
 
         assertEquals("TWCLVLTGOOGAAPLMSFTORCL", tickerSymbolsString );
     }
 
-    // TODO-DLN groupingBy
+    // TODO-DLN: Collector.toMap
 
+    @Test public void test(){
+        Map<Boolean, List<Stock>> theMap = Stock
+                .portfolio
+                .stream()
+                .collect(Collectors.groupingBy(s -> s.getValue() > 1000));
+        // The lambda will create a boolean, so we'll have 2 keys in
+        // our map: true and false
+
+        System.out.println("theMap: " + theMap);
+
+        List<Stock> stuffLessThan1000 = theMap.get(false);
+        System.out.println("stuffLessThan1000: " + stuffLessThan1000);
+    }
 
     // TODO-DLN reduce
     // TODO-DLN min
