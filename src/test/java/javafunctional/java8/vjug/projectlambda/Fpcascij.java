@@ -24,9 +24,8 @@ public class Fpcascij {
      * - inherently serial
      * - not thread safe
      */
-    @Test public void externalIteraion(){
+    @Test public void externalIteration(){
         Double highestValue = Double.MIN_VALUE;
-
         for(Stock s: Stock.portfolio){
             if(s.getQuantity() > 50){
                 if(s.getValue() > highestValue){
@@ -34,19 +33,16 @@ public class Fpcascij {
                 }
             }
         }
-
         assertEquals(9228.28, highestValue, 1);
     }
 
     /**
-     * 
      */
-    @Test public void internalWithLambdas(){
-        OptionalDouble highestValue = Stock.portfolio.stream()
+    @Test public void internalIteration(){
+        Double highestValue = Stock.portfolio.stream()
                 .filter(s -> s.getQuantity() > 50)
                 .mapToDouble(s -> s.getValue())
-                .max();
-
-        assertEquals(9228.28, highestValue.getAsDouble(), 1);
+                .max().getAsDouble();
+        assertEquals(9228.28, highestValue, 1);
     }
 }
