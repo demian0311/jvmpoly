@@ -26,7 +26,7 @@ public class ProvidedFunctionalInterfaces {
      */
     @Test public void predicate() {
         Predicate<Stock> valueOver1000 = s -> s.getValue() > 1000;
-        assertEquals(false, valueOver1000.test(new Stock("FOO", 11.0, 20)));
+        assertEquals(false, valueOver1000.test(new Stock("FOO", 11.0, 20, "FOO")));
     }
 
     /**
@@ -34,7 +34,7 @@ public class ProvidedFunctionalInterfaces {
      */
     @Test public void function() {
         Function<Stock, Double> findValue = (Stock s) -> s.getPrice() * s.getQuantity();
-        assertEquals(new Double("30"), findValue.apply(new Stock("GOOG", 3.0, 10)));
+        assertEquals(new Double("30"), findValue.apply(new Stock("GOOG", 3.0, 10, "FOO")));
     }
 
     /**
@@ -52,7 +52,7 @@ public class ProvidedFunctionalInterfaces {
      */
     @Test public void consumer() {
         Consumer<Stock> sell = (arg) -> System.out.println("\tSELL ORDER: " + arg);
-        sell.accept(new Stock("FOO", 3.0, 12));
+        sell.accept(new Stock("FOO", 3.0, 12, "FOO"));
     }
 }
 // TODO-DLN: show a couple of the functions that work with primitives.

@@ -16,10 +16,10 @@ import static org.junit.Assert.assertTrue;
 public class JustifyingLambdas {
 
     private List<Stock> portfolio = Arrays.asList(
-            new Stock("GOOG", 400.0, 759),
-            new Stock("AAPL", 5.0, 100),
-            new Stock("MSFT", 5.0, 19),
-            new Stock("CSCO", 5.0, 84));
+            new Stock("GOOG", 400.0, 759, "FOO"),
+            new Stock("AAPL", 5.0, 100, "FOO"),
+            new Stock("MSFT", 5.0, 19, "FOO"),
+            new Stock("CSCO", 5.0, 84, "FOO"));
 
     @Test public void isAppleThere() {
         boolean isAppleThere = false;

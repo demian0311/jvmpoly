@@ -9,10 +9,10 @@ import java.util.List;
 public class LambdasTheBad {
 
     private List<Stock> stocks = Arrays.asList(
-            new Stock("AAPL", 5.0, 1),
-            new Stock("MSFT", 5.0, 1),
-            new Stock("CSCO", 5.0, 1),
-            new Stock("GOOG", 400.0, 1));
+            new Stock("AAPL", 5.0, 1, "FOO"),
+            new Stock("MSFT", 5.0, 1, "FOO"),
+            new Stock("CSCO", 5.0, 1, "FOO"),
+            new Stock("GOOG", 400.0, 1, "FOO"));
 
     /*
     @Test public void test() {

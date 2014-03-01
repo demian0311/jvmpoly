@@ -22,7 +22,7 @@ public class HigherOrderFunctions {
             if(overMaxValue > 0) {
                 Integer numberToSell = (int)Math.ceil(overMaxValue / s.getPrice());
                 System.out.println(String.format(">> SELL %s shares of %s", numberToSell, s.getTicker()));
-                return new Stock(s.getTicker(), s.getPrice(), s.getQuantity() - numberToSell);
+                return new Stock(s.getTicker(), s.getPrice(), s.getQuantity() - numberToSell, s.getExchange());
             } else {
                 return s;
             }
@@ -31,19 +31,19 @@ public class HigherOrderFunctions {
 
     @Test public void shouldNotSell(){
         Function<Stock, Stock> alg = createBalanceStockAlgorithm(5.0);
-        Stock result = alg.apply(new Stock("FOO", 3.0, 1));
+        Stock result = alg.apply(new Stock("FOO", 3.0, 1, "FOO"));
         assertEquals("1", result.getQuantity().toString());
     }
 
     @Test public void shouldSell() {
         Function<Stock, Stock> alg = createBalanceStockAlgorithm(5.0);
-        Stock result = alg.apply(new Stock("FOO", 3.0, 3));
+        Stock result = alg.apply(new Stock("FOO", 3.0, 3, "FOO"));
         assertTrue(result.getValue() <= 5.0);
     }
 
     @Test public void shoudlSellExactMatch(){
         Function<Stock, Stock> alg = createBalanceStockAlgorithm(5.0);
-        Stock result = alg.apply(new Stock("FOO", 5.0, 2));
+        Stock result = alg.apply(new Stock("FOO", 5.0, 2, "FOO"));
         assertTrue(result.getValue() <= 5.0);
         assertEquals("1", result.getQuantity().toString());
     }

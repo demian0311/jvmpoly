@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 public class FunctionalInterfaces {
     @Test public void ourOwnPredicate(){
         ShouldSell shouldSell = s -> s.getQuantity() > 1000;
-        assertTrue(shouldSell.analyze(new Stock("AAA", 20d, 1050)));
+        assertTrue(shouldSell.analyze(new Stock("AAA", 20d, 1050, "FOO")));
     }
 }
 

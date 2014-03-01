@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -87,6 +88,21 @@ public class ReductionsTest {
     }
 
     // TODO-DLN: Collector.toMap
+    @Test public void toMap(){
+        System.out.println("hello world");
+
+        /*
+        Map<String, List<Stock>> theMap = Stock.portfolio
+                .stream()
+                .collect(Collectors.toMap(
+                        Stock::getExchange, //Stock::getTicker, //Stock s -> s.getValue, // Stock::getValue, // won't let me pass a lambda here
+                        Function::identity));
+                        */
+
+    }
+
+
+
     // TODO-DLN reduce
     // TODO-DLN min
     // TODO-DLN max

@@ -13,7 +13,7 @@ public class OptionalUsage{
         Optional<Stock> firstStock = Stock.portfolio.stream().findFirst();
         //assertTrue(firstStock.isPresent());
         if(firstStock.isPresent()) {
-            assertEquals(new Stock("TWC", 135.71, 68), firstStock.get());
+            assertEquals(new Stock("TWC", 135.71, 68, "DOW"), firstStock.get());
         }else {
             fail("there should have been a first stock");
         }
