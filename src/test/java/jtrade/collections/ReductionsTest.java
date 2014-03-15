@@ -89,19 +89,14 @@ public class ReductionsTest {
 
     // TODO-DLN: Collector.toMap
     @Test public void toMap(){
-        System.out.println("hello world");
-
-        /*
+        /* GRRRR
         Map<String, List<Stock>> theMap = Stock.portfolio
                 .stream()
                 .collect(Collectors.toMap(
-                        Stock::getExchange, //Stock::getTicker, //Stock s -> s.getValue, // Stock::getValue, // won't let me pass a lambda here
+                        Stock::getTicker,
                         Function::identity));
                         */
-
     }
-
-
 
     // TODO-DLN reduce
     // TODO-DLN min

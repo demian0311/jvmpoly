@@ -1,4 +1,4 @@
-package javafunctional.java8;
+package javafunctional.java8.koans;
 
 import org.junit.Test;
 
