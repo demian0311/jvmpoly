@@ -19,6 +19,11 @@ import java.util.stream.Collectors;
  */
 public class CollectorsTest {
 
+    /**
+     * .collect is a mutable reduction operation.  You give it the functions it needs
+     * to turn your stream into a new collection.
+     */
+
     @Test public void collect(){
         List<String> tickerSymbols = Stock.portfolio.stream() // Stream for processing
                 .map(Stock::getTicker)
@@ -56,7 +61,7 @@ public class CollectorsTest {
 
     // TODO-DLN: Collector.toMap
 
-    @Test public void test(){
+    @Test public void collect_groupingBy(){
         Map<Boolean, List<Stock>> theMap = Stock
                 .portfolio
                 .stream()
