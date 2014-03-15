@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
  * http://download.java.net/jdk8/docs/api/java/util/stream/ReductionsTest.html
  *
  * Collectors are a way to get out of the FP stream.
+ * Reductions are a special case of terminals.
  */
 public class ReductionsTest {
 

@@ -17,6 +17,8 @@ import static java.util.stream.Collectors.*;
 
 
 /**
+ * Great information on Streams.
+ * http://download.java.net/lambda/b78/docs/api/java/util/stream/package-summary.html
  */
 @State(Scope.Thread)
 public class StreamTest {
@@ -24,26 +26,25 @@ public class StreamTest {
     // stream is an iterator on steroids
     // stream is an abstraction that represents 0 or more values
 
-    List<String> strings = Arrays.asList("alpha", "bravo", "charlie", "delta", "echo", "foxtrot", "golf", "hotel", "india", "juliet");
+    List<String> strings = Arrays.asList(
+            "alpha", "bravo", "charlie", "delta", "echo",
+            "foxtrot", "golf", "hotel", "india", "juliet");
 
     @Test
     public void test(){
-
-        //strings.forEach(s -> System.out.println(s));
-
         strings.replaceAll(s -> s.toUpperCase());
         System.out.println(strings);
 
         // we can't move things from the list
         // get it into an ArrayList so we can change what is in it
         List<String> list2 = new ArrayList<>(strings);
-        list2.removeIf(s -> s.length() < 6);
+        list2.removeIf(s -> s.length() < 6); // shouldn't be mutating the list
         System.out.println(list2);
     }
 
     @Test public void test2() {
         System.out.println(
-                strings.stream()                           //
+                strings.stream()                           // source
                         .filter(s -> s.length() >= 6)      // intermediate
                         .peek(s -> System.out.printf("**%s**\n", s))
                         .map(s -> s.toUpperCase())         // intermediate like a replaceAll
