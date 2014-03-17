@@ -5,34 +5,49 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 public class OptionalUsage{
-    // TODO: where does optional show up coming out of the collecitons API?
+
+    @Test public void usingOptional() {
+        Optional<String> s = Optional.of("Hello World!");
+        Optional<String> s1 = Optional.empty();
+
+        if(s.isPresent()) {
+            assertEquals("Hello World!", s.get());
+        }
+    }
+
+
     @Test public void optionalInCollections(){
-        Optional<Stock> firstStock = Stock.portfolio.stream().findFirst();
-        //assertTrue(firstStock.isPresent());
+        Optional<Stock> firstStock = Stock.portfolio
+                .stream()
+                .findFirst();
+
         if(firstStock.isPresent()) {
-            assertEquals(new Stock("TWC", 135.71, 68, "DOW"), firstStock.get());
+            assertEquals("TWC", firstStock.get().getTicker());
         }else {
             fail("there should have been a first stock");
         }
     }
 
-    // TODO: the wrong way to process Optional
-    @Test public void wrongOptionalProcessing() {
-        Optional<String> name = Optional.of("Jay");
-        assertEquals("Jay", name.get());
-
-        Optional<String> name1 = Optional.empty();
-        //System.out.println(">> " + name1.get());
+    @Test public void dontCallGetWithoutChecking() {
+        Optional<String> name = Optional.empty();
+        try{
+            name.get();
+            fail("should have thrown an exception");
+        } catch(NoSuchElementException e){
+            System.out.println("e: " + e.getMessage());
+            // calling .get() on an empty Optional throws
+            // a NoSuchElementException
+        }
     }
 
-    // TODO: Optional equality
     @Test public void optionalEquality() {
-        Optional<String> name = Optional.of("Jay");
-        Optional<String> name2 = Optional.of("Jay");
-        Optional<String> name3 = Optional.of("Fay");
+        Optional<String> name = Optional.of("Foo");
+        Optional<String> name2 = Optional.of("Foo");
+        Optional<String> name3 = Optional.of("Bar");
 
         assertEquals(name, name2);
         assertEquals(name.hashCode(), name2.hashCode());
@@ -41,9 +56,12 @@ public class OptionalUsage{
         assertNotEquals(name2.hashCode(), name3.hashCode());
     }
 
-    // TODO: using optionals in your own beans
     @Test public void optionalsInBeans() {
-        Person p = new Person("Demian", Optional.empty(), "Neidetcher", new Date());
+        Person p = new Person(
+                "Demian",
+                Optional.empty(),
+                "Neidetcher",
+                new Date());
     }
 }
 
