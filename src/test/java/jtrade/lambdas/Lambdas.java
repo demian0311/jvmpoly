@@ -82,6 +82,7 @@ public class Lambdas {
         assertEquals(expected, stocksToSell);
     }
 
+
     @Test public void withStreams3(){
         Predicate<Stock> myPredicate = s -> s.getValue() > 1000;
 
