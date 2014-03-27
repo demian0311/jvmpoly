@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 import java.util.function.Function;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,9 +18,9 @@ public class FizzBuzzTest {
     }
 
     @Test public void runIt() {
-        for(int ii = 1; ii <= 100; ii++) {
-            System.out.println(fizzBuzz(ii));
-        }
+        IntStream
+                .range(0, 100)
+                .forEach(ii -> System.out.println(fizzBuzz(ii)));
     }
 
     @Test public void testFizzBuzz() {
