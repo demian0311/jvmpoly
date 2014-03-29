@@ -5,14 +5,31 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-interface Foo{
+@FunctionalInterface
+interface Interface{
+    void foo();
+
+    default void bar() {
+        foo();
+        System.out.println("bar");
+    }
+}
+
+@FunctionalInterface
+interface SamInterface{
     void foo();
 }
 
 @FunctionalInterface
-interface Bar{
-    void bar();
-    //void baz(); // multiple non-overriding abstract methods foudn in interface...
+interface SamInterfaceWithDefault{
+    void foo();
+
+    default void bar(){
+        foo();
+        System.out.println("called foo too");
+    }
+
+    //void baz(); // multiple non-overriding abstract methods found in interface...
 }
 
 public class InterfaceTest {
