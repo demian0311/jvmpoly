@@ -16,11 +16,19 @@ import java.util.stream.Collectors;
  */
 public class Lambdas {
 
-    @Test public void function() {
+    @Test public void lambdasOnTheirOwn(){
+        Runnable r = () -> System.out.println("hello world");
+        r.run();
+
+        Predicate<String> isEmpty = (s) -> s.isEmpty();
+        assertFalse(isEmpty.test("HELLO"));
+    }
+
+    @Test public void functions() {
         Function<Integer, Integer> f = new Function<Integer, Integer>() {
             @Override
-            public Integer apply(Integer integer) {
-                return Math.multiplyExact(integer, 2);
+            public Integer apply(Integer num) {
+                return num * 2;
             }
         };
 
@@ -28,7 +36,7 @@ public class Lambdas {
         assertEquals(Long.valueOf(4), Long.valueOf(result));
     }
 
-    @Test public void function2() {
+    @Test public void function1() {
         Function<Integer, Integer> f = (Integer num) -> {
             return num * 2;
         };
@@ -37,7 +45,7 @@ public class Lambdas {
         assertEquals(Long.valueOf(4), Long.valueOf(result));
     }
 
-    @Test public void function3() {
+    @Test public void function2() {
         Function<Integer, Integer> f = num -> num * 2;
 
         Integer result = f.apply(2);
@@ -46,7 +54,7 @@ public class Lambdas {
 
     private List<String> expected = Arrays.asList("TWC", "GOOG", "AAPL", "MSFT");
 
-    public void withStreams(){
+    @Test public void withStreams0(){
         Predicate<Stock> myPredicate = new Predicate<Stock>() {
             @Override
             public boolean test(Stock s) {
@@ -69,7 +77,7 @@ public class Lambdas {
         assertEquals(expected, stocksToSell);
     }
 
-    @Test public void withStreams2(){
+    @Test public void withStreams1(){
         Predicate<Stock> myPredicate = (Stock s) -> {return s.getValue() > 1000; };
 
         Function<Stock, String> myFunction = (Stock s) -> {return s.getTicker(); };
@@ -83,7 +91,7 @@ public class Lambdas {
     }
 
 
-    @Test public void withStreams3(){
+    @Test public void withStreams2(){
         Predicate<Stock> myPredicate = s -> s.getValue() > 1000;
 
         Function<Stock, String> myFunction = s -> s.getTicker();
@@ -97,7 +105,7 @@ public class Lambdas {
     }
 
 
-    @Test public void withStreams4(){
+    @Test public void withStreams3(){
         List<String> stocksToSell = Stock.portfolio.stream()
                 .filter(s -> s.getValue() > 1000)
                 .map(s -> s.getTicker())
