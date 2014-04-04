@@ -9,9 +9,6 @@ import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.*;
 
-/**
- * Created by demian on 4/2/14.
- */
 public class ParallelStreams {
 
     private void sell(String ticker){
