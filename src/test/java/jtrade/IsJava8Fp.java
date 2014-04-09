@@ -29,13 +29,17 @@ public class IsJava8Fp extends Assert{
         assertEquals(new Integer(12), add7.apply(5));
     }
 
-    public Integer functionWrapper(Function<Integer, Integer> f, Integer arg){
-        return f.apply(arg);
+    public Integer timer(Function<Integer, Integer> f, Integer arg){
+        Long start = System.currentTimeMillis();
+        Integer valueToReturn = f.apply(arg);
+        System.out.println("took " +
+                        (System.currentTimeMillis() - start) + "ms");
+        return valueToReturn;
     }
 
-    @Test public void functionsThatTakeOtherFunctio() {
+    @Test public void functionsThatTakeOtherFunction() {
         Function<Integer, Integer> times3 = (x -> x * 3);
-        assertEquals(new Integer(15), functionWrapper(times3, 5));
+        assertEquals(new Integer(15), timer(times3, 5));
     }
 
     public Function<Integer, Integer> multiplyBy(Integer arg) {
