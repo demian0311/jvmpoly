@@ -1,7 +1,11 @@
 package futurespromises
 
-import scala.util.Try
+import scala.util.{Failure, Success, Random, Try}
 import org.junit.{Assert, Test}
+import scala.concurrent.Future
+
+// This is needed for the Future to work
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
  * This is me getting a better understanding of futures by walking thru:
@@ -18,10 +22,38 @@ class Futures extends Assert{
   type Espresso = String
   type Cappuccino = String
 
-  def grind(beans: CoffeeBeans): GroundCoffee = s"ground coffee of $beans"
-  def heatWater(water: Water): Water = water.copy(temperature = 85)
-  def frothMilk(milk: Milk): FrothedMilk = s"frothed $milk"
-  def brew(coffee: GroundCoffee, heatedWater: Water): Espresso = "espresso"
+  def grind(beans: CoffeeBeans): Future[GroundCoffee] = Future {
+    println("start grinding...")
+    Thread.sleep(Random.nextInt(2000))
+    if(beans == "baked beans") throw GrindingException("are you jokin?")
+    println("finished grinding...")
+
+    s"ground coffee of $beans"
+  }
+
+  def heatWater(water: Water): Future[Water] = Future{
+    println("heating the water now")
+    Thread.sleep(Random.nextInt(2000))
+    println("hot, it's hot!")
+
+    water.copy(temperature = 85)
+  }
+
+  def frothMilk(milk: Milk): Future[FrothedMilk] = Future{
+    println("milk frothing system engaged!")
+    Thread.sleep(Random.nextInt(2000))
+    println("shutting down milk frothing system")
+
+    s"frothed $milk"
+  }
+
+  def brew(coffee: GroundCoffee, heatedWater: Water): Future[Espresso] = Future{
+    println("happy brewing :)")
+    Thread.sleep(Random.nextInt(2000))
+    println("it's brewed!")
+    "espresso"
+  }
+
   def combine(espresso: Espresso, frothedMilk: FrothedMilk): Cappuccino = "cappuccino"
 
   case class GrindingException(msg: String) extends Exception(msg)
@@ -29,22 +61,16 @@ class Futures extends Assert{
   case class WaterBoilingException(msg: String) extends Exception(msg)
   case class BrewingException(msg: String) extends Exception(msg)
 
-  def prepareCappuccino(): Try[Cappuccino] = for {
-    ground <- Try(grind("arabica beans"))
-    water <- Try(heatWater(Water(25)))
-    espresso <- Try(brew(ground, water))
-    foam <- Try(frothMilk("milk"))
-  } yield combine(espresso, foam)
+  @Test def foo(){
+    grind("baked beans")
+  }
 
   @Test def test(){
-    val result = prepareCappuccino()
-    println("result: " + result)
-
-    Assert.assertTrue(result.isSuccess)
-    //println("result.get(): " + result.get())
-
-    //Assert.assertEquals("cappuccino": Cappuccino, result.get())
-
-    //assertEquals("cappuccino", result.get)
+    val response = grind("baked beans")
+    println("response: " + response)
   }
+
+
+
+
 }
