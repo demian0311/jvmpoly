@@ -140,8 +140,4 @@ class Futures extends Assert{
     println(timer) // 1ms
     // the timing on this doesn't really make sense to me
   }
-
-
-
-
 }
