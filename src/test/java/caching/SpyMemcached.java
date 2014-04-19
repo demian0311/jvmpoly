@@ -50,6 +50,12 @@ class Person implements Serializable{
     }
 }
 
+/**
+ * Yeah, this is an integration test.  You need memcache running:
+ *
+ *  > brew install memcached
+ *  > memcached
+ */
 public class SpyMemcached {
     private MemcachedClient memcachedClient;
     private InetSocketAddress inetSocketAddress;
