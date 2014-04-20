@@ -11,65 +11,6 @@ import java.net.InetSocketAddress;
 import java.util.Map;
 import java.util.Optional;
 
-class Person implements Serializable{
-    private final String name;
-    private final String email;
-
-    Person(String nameIn, String emailIn){
-        name = nameIn;
-        email = emailIn;
-    }
-
-    String getName(){ return name; }
-    String getEmail(){ return email;}
-
-    public static String genKey(int id){
-        return "Person(" + id + ")";
-    }
-
-    @Override
-    public String toString() {
-        return "Person{name='" + name + '\'' + ", email='" + email + "'}";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Person person = (Person) o;
-
-        if (!email.equals(person.email)) return false;
-        if (!name.equals(person.name)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + email.hashCode();
-        return result;
-    }
-}
-
-class PersonService{
-    Map<Integer, Optional<Person>> persons = ImmutableMap.of(
-            0, Optional.of(new Person("Demian", "demian0311@gmail.com")),
-            1, Optional.empty(),
-            2, Optional.of(new Person("Foo", "foo@bar.com")),
-            3, Optional.of(new Person("Bar", "bar@bar.com")));
-
-    public Optional<Person> getPerson(int id){
-        try {
-            Thread.sleep(200);
-        } catch(InterruptedException ie) {
-            fail("ie: " + ie.getMessage());
-        }
-        return persons.get(id);
-    }
-}
-
 
 /**
  * Yeah, this is an integration test.  You need memcache running:
