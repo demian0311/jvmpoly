@@ -1,4 +1,4 @@
-package caching;
+package fourthings.caching;
 
 import com.google.common.collect.ImmutableMap;
 import net.spy.memcached.MemcachedClient;
@@ -109,7 +109,7 @@ public class SpyMemcached {
         MemcachedClient c = getClient();
         Person person = new Person("Demian", "demian0311@gmail.com");
 
-        int expirationSeconds = 3600;
+        int expirationSeconds = 60; // this is very short
         c.set(Person.genKey(99), expirationSeconds, person);
 
         Person myObject=(Person)c.get(Person.genKey(99));
