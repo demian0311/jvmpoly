@@ -1,13 +1,15 @@
 package fourthings.caching;
 
-import com.google.common.collect.ImmutableMap;
+import com.codahale.metrics.MetricRegistry;
+import fourthings.Person;
+import fourthings.PersonService;
 import net.spy.memcached.MemcachedClient;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.Map;
 import java.util.Optional;
 
@@ -58,7 +60,7 @@ public class SpyMemcached {
         assertEquals(person, myObject);
     }
 
-    PersonService personService = new PersonService();
+    PersonService personService = new PersonService(new MetricRegistry());
 
     /**
      * This is how the client code would behave.
@@ -89,6 +91,14 @@ public class SpyMemcached {
         assertEquals("foo@bar.com",    getPerson(2).get().getEmail());
     }
 
+    public int getIntStat(String statName){
+        return Integer.getInteger(getClient().getStats().get(getSocketAddress()).get(statName));
+    }
+
+    public int getHits() { return getIntStat("get_hits"); }
+    public int getMisses() { return getIntStat("get_misses");}
+    public int getBytes() { return getIntStat("bytes");}
+
     @Test public void getStats(){
         MemcachedClient c = getClient();
         Map localhostStats = c.getStats().get(getSocketAddress());
@@ -101,5 +111,13 @@ public class SpyMemcached {
         assertTrue(!localhostStats.get("get_hits").equals("0"));
         assertTrue(!localhostStats.get("get_misses").equals("0"));
         assertTrue(localhostStats.get("evictions").equals("0"));
+    }
+
+    @Test public void versions(){
+        MemcachedClient c = getClient();
+
+        Map<SocketAddress, String> versions = c.getVersions();
+        System.out.println("versions: " + versions);
+
     }
 }

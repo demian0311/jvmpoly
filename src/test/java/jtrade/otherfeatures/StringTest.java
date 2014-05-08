@@ -17,6 +17,9 @@ public class StringTest {
         System.out.println("allTogether: " + allTogether);
 
         assertEquals("this, that, theOther", allTogether);
+
+
+
     }
 
     @Test public void stringJoiner() {

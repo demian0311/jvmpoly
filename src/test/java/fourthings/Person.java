@@ -1,18 +1,18 @@
-package fourthings.caching;
+package fourthings;
 
 import java.io.Serializable;
 
-class Person implements Serializable {
+public class Person implements Serializable {
     private final String name;
     private final String email;
 
-    Person(String nameIn, String emailIn){
+    public Person(String nameIn, String emailIn){
         name = nameIn;
         email = emailIn;
     }
 
-    String getName(){ return name; }
-    String getEmail(){ return email;}
+    public String getName(){ return name; }
+    public String getEmail(){ return email;}
 
     public static String genKey(int id){
         return "Person(" + id + ")";

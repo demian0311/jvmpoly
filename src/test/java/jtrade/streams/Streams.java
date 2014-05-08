@@ -33,7 +33,8 @@ public class Streams {
     @Test public void methodReferences(){
         IntStream
                 .range(0, 10)
-                .forEach(System.out::println);
+                .forEach(ii -> System.out.println(ii));
+        //.forEach(System.out::println);
     }
 
     @Test public void streamPipeline(){

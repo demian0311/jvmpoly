@@ -59,7 +59,7 @@ public class OptionalUsage{
     @Test public void optionalsInBeans() {
         Person p = new Person(
                 "Demian",
-                Optional.empty(),
+                Optional.of(null), //empty(),
                 "Neidetcher",
                 new Date());
     }

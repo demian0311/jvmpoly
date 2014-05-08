@@ -21,6 +21,10 @@ public class SamInterfaces {
     interface StringManip {
         String doIt(String arg);
         //String doThat(String arg);
+
+        default public String toUpper(String s){
+           return s.toUpperCase();
+        }
     }
 
     @Test
